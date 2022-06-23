@@ -4,3 +4,6 @@ https://superuser.com/questions/236820/how-do-i-remove-the-same-part-of-a-file-n
 https://www.calculator.net/ip-subnet-calculator.html
 
 get-childitem *.mp4 | foreach { rename-item $_ $_.Name.Replace("y2mate.com - ", "") }
+
+
+ADD MORE DETAILS
