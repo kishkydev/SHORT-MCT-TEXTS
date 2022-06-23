@@ -1,0 +1,91 @@
+az group create --location northeurope \
+                --name NIGERIA_OFFICE_RG
+
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+az network vnet create --name NJA-VNET \
+                       --resource-group NIGERIA_OFFICE_RG \
+                       --address-prefix 192.168.20.0/24
+
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+az network vnet subnet create --address-prefix 192.168.20.16/28 \
+                              --name Client-Subnet \
+                              --resource-group NIGERIA_OFFICE_RG \
+                              --vnet-name NJA-VNET
+
+az network vnet subnet create --address-prefix 192.168.20.0/28 \
+                              --name Server-Subnet \
+                              --resource-group NIGERIA_OFFICE_RG \
+                              --vnet-name NJA-VNET
+                          
+			OR
+
+az network vnet create \
+    --resource-group NIGERIA_OFFICE_RG \
+    --name NJA-VNET \
+    --address-prefix 192.168.20.0/24 \
+    --subnet-name Client-Subnet \
+    --subnet-prefix 192.168.20.16/28
+
+az network vnet subnet create \
+    --resource-group NIGERIA_OFFICE_RG \
+    --vnet-name NJA-VNET \
+    --name Server-Subnet \
+    --address-prefix 192.168.20.0/28
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+az vm create \
+  --resource-group "NIGERIA_OFFICE_RG" \
+  --name "Client-A" \
+  --image "Win2016Datacenter" \
+  --admin-username "Demouser" \
+  --admin-password "Demouser@123" \
+  --location northeurope
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+az network nic create -g NIGERIA_OFFICE_RG --vnet-name NJA-VNET --subnet Client-Subnet -n Client-A-NIC
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+az vm create \
+  --resource-group "NIGERIA_OFFICE_RG" \
+  --name "Client-B" \
+  --image "Win2016Datacenter" \
+  --admin-username "Demouser" \
+  --admin-password "Demouser@123" \
+  --location northeurope
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+az network nic create -g NIGERIA_OFFICE_RG --vnet-name NJA-VNET --subnet Client-Subnet -n Client-B-NIC
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+az vm create \
+    --resource-group NIGERIA_OFFICE_RG \
+    --name "Window-Server" \
+    --image "Win2019Datacenter" \
+    --admin-username "Demouser" \
+    --admin-password "Demouser@123" \
+    --location northeurope
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+az network nic create -g NIGERIA_OFFICE_RG --vnet-name NJA-VNET --subnet Server-Subnet -n Window-Server-NIC
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+az vm create \
+  --resource-group "NIGERIA_OFFICE_RG" \
+  --name "Linux-Server" \
+  --image "UbuntuLTS" \
+  --admin-username "demouser" \
+  --admin-password "Demouser@123" \
+  --location northeurope
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+az network nic create -g NIGERIA_OFFICE_RG --vnet-name NJA-VNET --subnet Server-Subnet -n Linux-Server-NIC

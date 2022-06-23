@@ -1,0 +1,19 @@
+az group create -l westus -n Vnet-test-rg
+
+az network vnet create --address-prefixes 10.20.0.0/16 --name test-vnet --resource-group Vnet-test-rg --subnet-name Frontend-Subnet --subnet-prefixes 10.20.1.0/24 
+
+az network vnet subnet create -g Vnet-test-rg --vnet-name test-vnet -n DB-Subnet --address-prefixes 10.20.3.0/24
+
+$frontendSubnet = New-AzVirtualNetworkSubnetConfig -Name frontendSubnet -AddressPrefix "10.0.1.0/24"
+$backendSubnet  = New-AzVirtualNetworkSubnetConfig -Name backendSubnet  -AddressPrefix "10.0.2.0/24"
+New-AzVirtualNetwork -Name Ps-vnet -ResourceGroupName test-vnet -Location centralus -AddressPrefix "10.0.0.0/16" -Subnet $frontendSubnet,$backendSubnet 
+
+
+
+Connect-AzAccount
+
+Get-AzSubscription
+
+Get-AzSubscription -TenantId "aaaa-aaaa-aaaa-aaaa"
+
+Get-AzSubscription -SubscriptionId "xxxx-xxxx-xxxx-xxxx" -TenantId "yyyy-yyyy-yyyy-yyyy" | Set-AzContext

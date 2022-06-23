@@ -1,0 +1,32 @@
+AD ROLES: 
+
+RBAC ROLES (IAM:Identity and access manager) : Role-based access control
+
+
+Get-AzVirtualNetwork -Name LINUX_LAB_VNET -ResourceGroupName LINUX_LAB_RG
+
+
+New-AzResourceGroup -Name LINUX_LAB_RG2 -Location WestEurope
+$frontendSubnet = New-AzVirtualNetworkSubnetConfig -Name frontendSubnet -AddressPrefix "10.0.1.0/24"
+$backendSubnet  = New-AzVirtualNetworkSubnetConfig -Name backendSubnet  -AddressPrefix "10.0.2.0/24"
+$midSubnet  = New-AzVirtualNetworkSubnetConfig -Name midSubnet  -AddressPrefix "10.0.3.0/24"
+New-AzVirtualNetwork -Name MyVirtualNetwork -ResourceGroupName  LINUX_LAB_RG -Location WestEurope -AddressPrefix "10.0.0.0/16" -Subnet $frontendSubnet,$backendSubnet,$midSubnet
+
+
+https://docs.microsoft.com/en-us/powershell/module/az.network/new-azvirtualnetwork?view=azps-7.1.0
+https://docs.microsoft.com/en-us/cli/azure/network/vnet?view=azure-cli-latest
+
+az network vnet create -g LINUX_LAB_RG -n Vnet-Cli --address-prefix 10.10.0.0/16 \
+    --subnet-name midSubnet --subnet-prefix 10.10.3.0/24
+
+
+az network vnet subnet create -n BackendSubnet --vnet-name Vnet-Cli -g LINUX_LAB_RG  --address-prefixes "10.10.0.0/24"
+az network vnet subnet create -n DBSubnet --vnet-name Vnet-Cli -g LINUX_LAB_RG  --address-prefixes "10.10.1.0/24"
+az network vnet subnet create -n PublicSubnet --vnet-name Vnet-Cli -g LINUX_LAB_RG  --address-prefixes "10.10.4.0/24"
+
+
+Remove-AzVirtualNetwork -Name Vnet-Cli -ResourceGroupName LINUX_LAB_RG  
+
+az network vnet delete -g LINUX_LAB_RG -n MyVirtualNetwork --verbose --debug
+
+

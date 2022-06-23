@@ -1,0 +1,86 @@
+az group create \
+    --name NIGERIA-rg \
+    --location northeurope
+
+
+
+az network vnet create \
+    --resource-group NIGERIA-rg \
+    --name NIG-VNET \
+    --address-prefix 192.168.20.0/24 \
+    --subnet-name SERVER-SUBNET \
+    --subnet-prefix 192.168.20.0/28
+
+az network vnet create \
+    --resource-group NIGERIA-rg \
+    --name NIG-VNET \
+    --address-prefix 192.168.20.0/24 \
+    --subnet-name CLIENT-SUBNET \
+    --subnet-prefix 192.168.20.16/28
+
+az network vnet subnet create \
+     --resource-group NIGERIA-rg \
+     --vnet-name NIG-VNET \
+     --name CLIENT-SUBNET \
+     --address-prefixes 192.168.20.16/28
+
+az network nic create \
+    --resource-group NIGERIA-rg \
+    --name lin_Ser_NIC \
+    --vnet-name NIG-VNET \
+    --subnet SERVER-SUBNET \
+  
+
+az vm create \
+    --resource-group NIGERIA-rg \
+    --name linServer \
+    --location northeurope \
+    --nics  lin_Ser_NIC\
+    --image UbuntuLTS \
+    --admin-username azureuser \
+    --generate-ssh-keys
+
+az network nic create \
+    --resource-group NIGERIA-rg \
+    --name win_Ser_NIC \
+    --vnet-name NIG-VNET \
+    --subnet SERVER-SUBNET \
+
+
+az vm create \
+  --resource-group "NIGERIA-rg" \
+  --name "winServer" \
+  --image "Win2016Datacenter" \
+  --admin-username "Demouser" \
+  --admin-password "Demouser@123" \
+  --location northeurope
+
+az network nic create \
+    --resource-group NIGERIA-rg \
+    --name Client1_NIC \
+    --vnet-name NIG-VNET \
+    --subnet CLIENT-SUBNET 
+
+***************
+az vm create \
+  --resource-group "NIGERIA-rg" \
+  --name "CLIENT1" \
+  --image "Winrs5-enterprise" \
+  --admin-username "Demouser" \
+  --admin-password "Demouser@123" \
+  --location northeurope
+
+az network nic create \
+    --resource-group NIGERIA-rg \
+    --name Client2_NIC \
+    --vnet-name NIG-VNET \
+    --subnet CLIENT-SUBNET \
+
+
+az vm create \
+  --resource-group "NIGERIA-rg" \
+  --name "CLIENT2" \
+  --image "Winrs5-enterprise" \
+  --admin-username "Demouser" \
+  --admin-password "Demouser@123" \
+  --location northeurope

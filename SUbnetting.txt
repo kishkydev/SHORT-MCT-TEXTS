@@ -1,0 +1,115 @@
+
+NIC
+
+
+IP address
+
+Ip address classes
+
+Private IPs
+
+Public Ips
+
+Private Network (LAN/WAN/PAN/MAN)
+
+Public Network
+
+Subnetting.
+
+IP calculator
+
+VNET (azure) design
+
+1 
+2
+4
+8
+16
+32
+64
+128
+
+11111011.11111111.11111111.11111111
+
+140.179.220.200
+
+126.10.245.1
+142.123.102.100
+192.168.10.200
+
+ 10001100 . 10110011 . 11011100. 11001000
+
+192.168.0.0
+192.168.0.1
+192.168.0.100
+192.168.0.101
+192.168.0.255
+
+192.168.1.0
+192.168.1.255
+
+192.168.2.0
+
+192.178.1.0
+
+192.168.1.1
+192.168.1.2
+
+192.168.0.0/16
+192.168.0.0/24
+192.168.1.0/24
+192.168.255.0/24
+
+
+
+12.3.0.45
+100.2.34.56
+128.1.2.3
+
+divide 216.21.5.0 into 5 networks
+216.21.5.0 /24
+255.255.255.0
+1111111.1111111.1111111.0000000
+5 networks
+00000101
+add 101 to the subnet mask in binary, the 101 should be seen as 3 ON bits 111
+111111.1111111.111111.11100000
+255.255.255.224
+increment = 2 raise to the power of the numbers of OFF BITS= 32
+216.21.5.0/27      ||    216.21.5.0 --- 216.21.5.31
+216.21.5.32/27   ||   216.21.5.32 ---- 216.21.5.63
+216.21.5.64/27   ||   216.21.5.64 ---- 216.21.5.95
+216.21.5.96/27   ||   216.21.5.96 ---- 216.21.5. 127
+216.21.5.128/27 ||   216.21.5.128 ---- 216.21.5.159
+216.21.5.160/27  ||  216.21.5.160 ---- 216.21.5.191
+216.21.5.192/27 ||   216.21.5.191 ---- 216.21.5. 223
+216.21.5.224/27 ||   216.21.5.224 ---- 216.21.5. 255
+
+
+216.21.5.0/27  how many number of hosts ?
+255.255.255.224
+11111111.1111111.1111111.11100000
+identfiy the no of off bits = 5
+h= 2rOff bits - 2 = 32-2 =30.
+
+00110010
+
+1. Divide 195.5.20.0  50 networks .
+what is the number of assignable Ips (hosts) in each of the new Subnets?
+What is the subnet mask of each of the new subnet ( answer in binary and slash notation)
+Can you have more than 50 networks?
+If yes, what is the range of the last Subnets?
+
+2. Divide 10.20.0.0   16 networks.
+what is the number of assignable Ips (hosts) in each of the new Subnets?
+What is the subnet mask of each of the new subnet ( answer in binary and slash notation)
+Can you have more than 50 networks?
+If yes, what is the range of the last Subnets?
+
+90/100 Pass Mark.
+
+
+If yes, what is the range of the last Subnets?
+
+
+
